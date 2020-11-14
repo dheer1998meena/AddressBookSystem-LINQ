@@ -43,7 +43,7 @@ namespace AddressBookSystem_LINQ
             table.Rows.Add("Rahul", "Ranjan", "Street1", "Faridabad", "Haryana", 121001, "9650925666", "Rahul@gmail.com");
             table.Rows.Add("Retesh", "Gupta", "Street2", "Jhansi", "UP", 878001, "890925666", "reetesh@gmail.com");
             table.Rows.Add("kajal", "Meena", "Street3", "Imartapura", "Rajasthan", 841001, "7412925666", "kajal@gmail.com");
-            table.Rows.Add("Rammurti", "Jhangid", "Street4", "Paris", "France", 7894551, "4569925666", "Rammurti@gmail.com");
+            table.Rows.Add("Rammurti", "Jhangid", "Street4", "Jabalpur", "MP", 7894551, "4569925666", "Rammurti@gmail.com");
             table.Rows.Add("Mansingh", "Meena", "Street5", "Dhans", "Rajasthan", 2394551, "9859925666", "mansingh@gmail.com");
             //Printing data
             Console.WriteLine("\nDataTable contents:");
@@ -80,8 +80,23 @@ namespace AddressBookSystem_LINQ
             //Delete the row
             records.Delete();
             //Printing data
-            Console.WriteLine("\nDataTable contents:");
+            Console.WriteLine("\n Deleted cotact details by name:");
             foreach (var record in table.AsEnumerable())
+            {
+                Console.WriteLine("FirstName: " + "\t" + record.Field<string>("FirstName") + "\t" + "LastName: " + "\t" + record.Field<string>("LastName") + "\t" + "Address: " + record.Field<string>("Address") + "\t" + "City: " + record.Field<string>("City") + "\t" + " State: " + record.Field<string>("State") + "\t" + "Zip: " + record.Field<int>("Zip") + "\t" + " PhoneNumber: " + record.Field<double>("PhoneNumber") + "\t" + "EmailID: " + record.Field<string>("Email"));
+            }
+        }
+        /// <summary>
+        /// UC6 Retrieving Contact Details By State Or City Name.
+        /// </summary>
+        public static void RetrievingContactDetailsByCityOrState()
+        {
+            var retrieveData = from records in table.AsEnumerable()
+                               where (records.Field<string>("City").Equals("Imartapura") || records.Field<string>("State").Equals("Rajasthan"))
+                               select records;
+            //Printing data
+            Console.WriteLine("\nRetrieved contactact details by city or state name :");
+            foreach (var record in retrieveData)
             {
                 Console.WriteLine("FirstName: " + "\t" + record.Field<string>("FirstName") + "\t" + "LastName: " + "\t" + record.Field<string>("LastName") + "\t" + "Address: " + record.Field<string>("Address") + "\t" + "City: " + record.Field<string>("City") + "\t" + " State: " + record.Field<string>("State") + "\t" + "Zip: " + record.Field<int>("Zip") + "\t" + " PhoneNumber: " + record.Field<double>("PhoneNumber") + "\t" + "EmailID: " + record.Field<string>("Email"));
             }

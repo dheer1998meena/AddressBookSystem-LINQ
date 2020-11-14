@@ -19,6 +19,8 @@ namespace AddressBookSystem_LINQ
             AddressBookDataTable.EditExistingContactDetails("Mansingh", "Meena", 322514);
             /// UC5 Delete Person Contact Using Name.
             AddressBookDataTable.DeleteContactUsingName();
+            /// UC6 Retrieving Contact Details By State Or City Name.
+            AddressBookDataTable.RetrievingContactDetailsByCityOrState();
             Console.ReadLine();
         }
     }
