@@ -106,7 +106,7 @@ namespace AddressBookSystem_LINQ
         /// </summary>
         public static void GetCountOfContactInCityOrState()
         {
-            Console.WriteLine("\n Get contact by city ");
+            Console.WriteLine("\n Get Count by city ");
             var countAsPerCity = (from records in table.AsEnumerable()
                                   group records by records.Field<string>("City") into Group
                                   select new { City = Group.Key, NumberOfContacts = Group.Count() });
@@ -114,7 +114,7 @@ namespace AddressBookSystem_LINQ
             {
                 Console.WriteLine($"City : {record.City}, Number Of Contacts : {record.NumberOfContacts}");
             }
-            Console.WriteLine("\n Get contact by state ");
+            Console.WriteLine("\n Get count by state ");
             var countAsPerState = (from records in table.AsEnumerable()
                                   group records by records.Field<string>("State") into Group
                                   select new { State = Group.Key, NumberOfContacts = Group.Count() });
