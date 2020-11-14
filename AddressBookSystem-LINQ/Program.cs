@@ -23,6 +23,8 @@ namespace AddressBookSystem_LINQ
             AddressBookDataTable.RetrievingContactDetailsByCityOrState();
             /// UC7 Get the count of number of contacts as per the state or city.
             AddressBookDataTable.GetCountOfContactInCityOrState();
+            /// UC8 Retrieves the records sorted by name for a given city.
+            AddressBookDataTable.SortedContactsByNameForAgivenCity("Imartapura");
             Console.ReadLine();
         }
     }

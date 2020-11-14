@@ -36,7 +36,7 @@ namespace AddressBookSystem_LINQ
 
             ///Adding First Name and Last name as primary key
             DataColumn[] primaryKeys = new DataColumn[2];
-            primaryKeys[0] =table.Columns["FirstName"];
+            primaryKeys[0] = table.Columns["FirstName"];
             primaryKeys[1] = table.Columns["LastName"];
             table.PrimaryKey = primaryKeys;
             ///Adding rows
@@ -49,7 +49,7 @@ namespace AddressBookSystem_LINQ
             Console.WriteLine("\nDataTable contents:");
             foreach (var record in table.AsEnumerable())
             {
-                Console.WriteLine("FirstName: " +"\t" + record.Field<string>("FirstName") + "\t" + "LastName: " + "\t" + record.Field<string>("LastName") + "\t" + "Address: " + record.Field<string>("Address") + "\t" + "City: " + record.Field<string>("City") + "\t" + " State: " + record.Field<string>("State") + "\t" + "Zip: " + record.Field<int>("Zip") + "\t" + " PhoneNumber: " + record.Field<double>("PhoneNumber") + "\t" + "EmailID: " + record.Field<string>("Email"));
+                Console.WriteLine("FirstName: " + "\t" + record.Field<string>("FirstName") + "\t" + "LastName: " + "\t" + record.Field<string>("LastName") + "\t" + "Address: " + record.Field<string>("Address") + "\t" + "City: " + record.Field<string>("City") + "\t" + " State: " + record.Field<string>("State") + "\t" + "Zip: " + record.Field<int>("Zip") + "\t" + " PhoneNumber: " + record.Field<double>("PhoneNumber") + "\t" + "EmailID: " + record.Field<string>("Email"));
             }
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace AddressBookSystem_LINQ
              where p.Field<string>("FirstName") == firstName && p.Field<string>("LastName") == lastName
              select p).ToList().ForEach(x => x[5] = zip);
             //Printing data
-            Console.WriteLine("\nDataTable contents:");
+            Console.WriteLine("\n Edit existing contacts details:");
             foreach (var record in table.AsEnumerable())
             {
                 Console.WriteLine("FirstName: " + "\t" + record.Field<string>("FirstName") + "\t" + "LastName: " + "\t" + record.Field<string>("LastName") + "\t" + "Address: " + record.Field<string>("Address") + "\t" + "City: " + record.Field<string>("City") + "\t" + " State: " + record.Field<string>("State") + "\t" + "Zip: " + record.Field<int>("Zip") + "\t" + " PhoneNumber: " + record.Field<double>("PhoneNumber") + "\t" + "EmailID: " + record.Field<string>("Email"));
@@ -75,8 +75,8 @@ namespace AddressBookSystem_LINQ
         {
             //Retrieve the datarow containing given name
             var records = (from p in table.AsEnumerable()
-                     where p.Field<string>("FirstName").Equals("Rahul") && p.Field<string>("LastName").Equals("Ranjan")
-                     select p).FirstOrDefault();
+                           where p.Field<string>("FirstName").Equals("Rahul") && p.Field<string>("LastName").Equals("Ranjan")
+                           select p).FirstOrDefault();
             //Delete the row
             records.Delete();
             //Printing data
@@ -116,11 +116,28 @@ namespace AddressBookSystem_LINQ
             }
             Console.WriteLine("\n Get count by state ");
             var countAsPerState = (from records in table.AsEnumerable()
-                                  group records by records.Field<string>("State") into Group
-                                  select new { State = Group.Key, NumberOfContacts = Group.Count() });
+                                   group records by records.Field<string>("State") into Group
+                                   select new { State = Group.Key, NumberOfContacts = Group.Count() });
             foreach (var record in countAsPerState)
             {
                 Console.WriteLine($"City : {record.State}, Number Of Contacts : {record.NumberOfContacts}");
+            }
+        }
+        /// <summary>
+        /// UC8 Retrieves the records sorted by name for a given city.
+        /// </summary>
+        /// <param name="City"></param>
+        public static void SortedContactsByNameForAgivenCity(string City)
+        {
+            Console.WriteLine("Sorting by name for City");
+            var retrievedData = from records in table.AsEnumerable()
+                                where records.Field<string>("City")== City
+                                orderby records.Field<string>("FirstName"), records.Field<string>("LastName")
+                                select records;
+            ///Print Data
+            foreach (var record in retrievedData)
+            {
+                Console.WriteLine("FirstName: " + "\t" + record.Field<string>("FirstName") + "\t" + "LastName: " + "\t" + record.Field<string>("LastName") + "\t" + "Address: " + record.Field<string>("Address") + "\t" + "City: " + record.Field<string>("City") + "\t" + " State: " + record.Field<string>("State") + "\t" + "Zip: " + record.Field<int>("Zip") + "\t" + " PhoneNumber: " + record.Field<double>("PhoneNumber") + "\t" + "EmailID: " + record.Field<string>("Email"));
             }
         }
     }
