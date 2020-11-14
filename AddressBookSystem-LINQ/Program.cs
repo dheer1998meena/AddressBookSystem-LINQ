@@ -15,6 +15,9 @@ namespace AddressBookSystem_LINQ
             Console.WriteLine("Welcome to the Address Book Data LINQ Operartion Program");
             ///Creating the instance of the address book repository
             AddressBookDataTable.AddDataIntoTable();
+            ///UC4 Editing exiting Contact Details.
+            AddressBookDataTable.EditExistingContactDetails("Mansingh", "Meena", 322514);
+            Console.ReadLine();
         }
     }
 }
