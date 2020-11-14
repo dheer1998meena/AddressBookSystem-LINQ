@@ -21,6 +21,8 @@ namespace AddressBookSystem_LINQ
             AddressBookDataTable.DeleteContactUsingName();
             /// UC6 Retrieving Contact Details By State Or City Name.
             AddressBookDataTable.RetrievingContactDetailsByCityOrState();
+            /// UC7 Get the count of number of contacts as per the state or city.
+            AddressBookDataTable.GetCountOfContactInCityOrState();
             Console.ReadLine();
         }
     }

@@ -101,5 +101,27 @@ namespace AddressBookSystem_LINQ
                 Console.WriteLine("FirstName: " + "\t" + record.Field<string>("FirstName") + "\t" + "LastName: " + "\t" + record.Field<string>("LastName") + "\t" + "Address: " + record.Field<string>("Address") + "\t" + "City: " + record.Field<string>("City") + "\t" + " State: " + record.Field<string>("State") + "\t" + "Zip: " + record.Field<int>("Zip") + "\t" + " PhoneNumber: " + record.Field<double>("PhoneNumber") + "\t" + "EmailID: " + record.Field<string>("Email"));
             }
         }
+        /// <summary>
+        /// UC7 Get the count of number of contacts as per the state or city.
+        /// </summary>
+        public static void GetCountOfContactInCityOrState()
+        {
+            Console.WriteLine("\n Get contact by city ");
+            var countAsPerCity = (from records in table.AsEnumerable()
+                                  group records by records.Field<string>("City") into Group
+                                  select new { City = Group.Key, NumberOfContacts = Group.Count() });
+            foreach (var record in countAsPerCity)
+            {
+                Console.WriteLine($"City : {record.City}, Number Of Contacts : {record.NumberOfContacts}");
+            }
+            Console.WriteLine("\n Get contact by state ");
+            var countAsPerState = (from records in table.AsEnumerable()
+                                  group records by records.Field<string>("State") into Group
+                                  select new { State = Group.Key, NumberOfContacts = Group.Count() });
+            foreach (var record in countAsPerState)
+            {
+                Console.WriteLine($"City : {record.State}, Number Of Contacts : {record.NumberOfContacts}");
+            }
+        }
     }
 }
